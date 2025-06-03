@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quick Menu</title>
+  <link rel="stylesheet" href="./prism-1.30.0/themes/prism.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .menu-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 1rem;
+      padding: 2rem;
+      width: 95%;
+      max-width: 1000px;
+      background: #ffffff;
+      border: 2px solid #ffffff;
+      border-radius: 4px;
+    }
+
+    .menu-item {
+      background-color: #ffffff;
+      border: 3px solid #2e7d32;
+      border-radius: 2px;
+      text-align: center;
+      padding: 1rem;
+      transition: background-color 0.3s, color 0.3s;
+      cursor: pointer;
+    }
+
+    .menu-item:hover {
+      background-color: #2e7d32;
+    }
+
+    .menu-item:hover i,
+    .menu-item:hover span,
+    .menu-item:hover img {
+      color: white;
+      filter: brightness(0) invert(1);
+    }
+
+    .menu-item i {
+      font-size: 28px;
+      color: #2e7d32;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .menu-item img {
+      width: 28px;
+      height: 28px;
+      margin-bottom: 0.5rem;
+    }
+
+    .menu-item span {
+      display: block;
+      color: #2e7d32;
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-container" id="menu"></div>
+
+  <script src="./prism-1.30.0/prism.js"></script>
+  <script>
+    const menuItems = {
+      "Docs": { url: "https://github.com/CrakA2/SinglePage", icon: "ti ti-book" },
+    };
+
+    const menuContainer = document.getElementById("menu");
+
+    Object.entries(menuItems).forEach(([name, data]) => {
+      const item = document.createElement("div");
+      item.className = "menu-item";
+
+      const isImage = /\.(png|jpg|jpeg|webp|gif)$/i.test(data.icon) || data.icon.startsWith("http");
+
+      item.innerHTML = `
+        <a href="${data.url}" target="_blank">
+          ${isImage
+            ? `<img src="${data.icon}" alt="${name} icon">`
+            : `<i class="${data.icon}"></i>`}
+          <span>${name}</span>
+        </a>
+      `;
+
+      menuContainer.appendChild(item);
+    });
+  </script>
+</body>
+</html>

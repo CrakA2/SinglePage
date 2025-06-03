@@ -210,10 +210,7 @@ If you want to bundle the JavaScript libraries:
 
 3. **Update the HTML script tags:**
    ```html
-   <!-- Replace CDN links with local files -->
    <script src="js/marked.min.js"></script>
-   <script src="js/prism-core.min.js"></script>
-   <script src="js/prism-autoloader.min.js"></script>
    ```
 
 4. **Update the CSS link:**
@@ -261,13 +258,6 @@ This template is specifically designed for educational purposes:
 - Check for JavaScript errors
 - Verify markdown syntax
 
-### Browser Compatibility
-
-- ✅ Chrome 60+
-- ✅ Firefox 55+
-- ✅ Safari 12+
-- ✅ Edge 79+
-
 ## 📝 Example Content Structure
 
 ```markdown
@@ -311,7 +301,7 @@ This template is free to use for educational and commercial purposes.
 
 - **Prism.js**: Syntax highlighting functionality and styles are powered by [Prism](https://github.com/PrismJS/prism), © 2012-2024 Lea Verou and contributors. Licensed under MIT.
 - **Marked.js**: Markdown parsing provided by [Marked](https://github.com/markedjs/marked), © 2011-2024 Christopher Jeffrey. Licensed under MIT.
-
+- **Tabler Icons**: UI icons provided by [Tabler](https://github.com/tabler/tabler-icons), © 2020-2024 Paweł Kuna. Licensed under MIT.
 ---
 
 **Happy documenting!** 🎉
