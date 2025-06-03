@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Markdown</title>
+
+    <!-- Prism.js CSS for code highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+
+        .container {
+            margin: 0 auto;
+            background: #ffffff;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .author-section {
+            background: #f7fafc;
+            border-left: 4px solid #48bb78;
+            padding: 20px 30px;
+            margin: 0;
+        }
+
+        .author-section h3 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .author-info span {
+            color: #4a5568;
+            font-size: 0.95em;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        /* Enhanced syntax highlighting styles */
+        pre[class*="language-"] {
+            margin: 1.5em 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            font-size: 0.9em;
+            overflow-x: auto;
+            border: 1px solid #e2e8f0;
+        }
+
+        code[class*="language-"] {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+        }
+
+        /* Default JSON highlighting */
+        pre:not([class*="language-"]) {
+            background: #f1f1eb;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1em;
+            overflow-x: auto;
+            margin: 1.5em 0;
+        }
+
+        pre:not([class*="language-"]) code {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+            color: #2d3748;
+        }
+
+        /* Bold text in code blocks - RED, BOLD with YELLOW background */
+        pre code strong,
+        pre code b,
+        code strong,
+        code b {
+            color: #e53e3e !important;
+            font-weight: bold !important;
+            background: #fff59d !important;
+            padding: 2px 4px !important;
+            border-radius: 3px !important;
+            box-shadow: 0 0 0 1px rgba(229, 62, 62, 0.2) !important;
+        }
+
+        /* Inline code styling */
+        p code, li code, td code {
+            background: rgba(72, 187, 120, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9em;
+            color: #2d3748;
+            border: 1px solid rgba(72, 187, 120, 0.2);
+        }
+
+        /* Heading styles */
+        h1, h2, h3, h4, h5, h6 {
+            color: #2d3748;
+            margin-top: 2em;
+            margin-bottom: 0.8em;
+            line-height: 1.3;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            border-bottom: 3px solid #48bb78;
+            padding-bottom: 10px;
+            margin-top: 1em;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+            color: #38a169;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: #2d3748;
+        }
+
+        h4 {
+            font-size: 1.2em;
+            color: #4a5568;
+        }
+
+        /* Paragraph and text styles */
+        p {
+            margin-bottom: 1.2em;
+            line-height: 1.7;
+            color: #4a5568;
+            font-size: 1.05em;
+        }
+
+        /* List styles */
+        ul, ol {
+            padding-left: 2em;
+            margin-bottom: 1.5em;
+        }
+
+        li {
+            margin-bottom: 0.6em;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+
+        ul li::marker {
+            color: #48bb78;
+        }
+
+        /* Blockquote styles */
+        blockquote {
+            border-left: 4px solid #48bb78;
+            padding: 20px 25px;
+            margin: 1.5em 0;
+            background: rgba(72, 187, 120, 0.05);
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+        }
+
+        blockquote p {
+            margin-bottom: 0;
+            color: #2d3748;
+        }
+
+        /* Table styles */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 2em 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+            border: 1px solid #e2e8f0;
+        }
+
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background: #48bb78;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        tr:nth-child(even) {
+            background: #f7fafc;
+        }
+
+        tr:hover {
+            background: rgba(72, 187, 120, 0.05);
+            transition: background 0.2s ease;
+        }
+
+        /* Link styles */
+        a {
+            color: #38a169;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        a:hover {
+            color: #2f855a;
+            border-bottom: 1px solid #38a169;
+        }
+
+        /* Image styles */
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin: 1em 0;
+        }
+
+        /* Custom alert boxes */
+        .alert {
+            padding: 16px 20px;
+            margin: 1.5em 0;
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+
+        .alert-info {
+            background: rgba(66, 153, 225, 0.1);
+            border-left-color: #4299e1;
+            color: #2d3748;
+        }
+
+        .alert-success {
+            background: rgba(72, 187, 120, 0.1);
+            border-left-color: #48bb78;
+            color: #2d3748;
+        }
+
+        .alert-warning {
+            background: rgba(237, 137, 54, 0.1);
+            border-left-color: #ed8936;
+            color: #2d3748;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 0;
+                box-shadow: none;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .author-section {
+                padding: 15px 20px;
+            }
+            
+            pre[class*="language-"] {
+                font-size: 0.8em;
+            }
+            
+            table {
+                font-size: 0.9em;
+            }
+            
+            th, td {
+                padding: 8px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content" id="documentationContent">
+            <!-- Markdown content will be rendered here -->
+        </div>
+    </div>
+
+    <!-- Include required libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+    <script>
+        Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/';
+
+        function getQueryParam(param) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(param);
+        }
+
+        async function loadMarkdown() {
+            const mdUrl = getQueryParam('md');
+            if (!mdUrl) {
+                document.getElementById('documentationContent').innerText = '❌ No markdown URL provided (use ?md=...)';
+                return;
+            }
+
+            try {
+                const res = await fetch(mdUrl);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const md = await res.text();
+
+                // Convert markdown to HTML
+                const html = marked.parse(md);
+                document.getElementById('documentationContent').innerHTML = html;
+
+                // Apply bold transformation inside code blocks
+                highlightBoldInCode();
+
+                // Re-run Prism highlighting
+                Prism.highlightAll();
+            } catch (e) {
+                document.getElementById('documentationContent').innerText = `⚠️ Failed to load markdown: ${e.message}`;
+            }
+        }
+
+        function highlightBoldInCode() {
+            const codeBlocks = document.querySelectorAll('pre code, code');
+            codeBlocks.forEach(block => {
+                block.innerHTML = block.innerHTML.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+            });
+        }
+
+        loadMarkdown();
+    </script>
+</body>
+</html>
